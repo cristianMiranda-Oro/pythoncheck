@@ -10,7 +10,7 @@ Inmputs:
     credentials: file .json that contains service_account
     sheetName: document sheet name
     numberSheet: number of the page
-    routeOut: Route alocate file csv if not then it will be saved in the default path
+    inputRoute: Route alocate file csv if not then it will be saved in the default path
 Output:
     return: route where the CSV file was saved
 """
@@ -22,7 +22,7 @@ from datetime import datetime
 
 
 def spreadsheetsToCSV(credentials = None , sheetName = None, 
-                        numberSheet = None, routeOut = ""):
+                        numberSheet = None, inputRoute = ""):
     
     outRoute = ""
     try:
@@ -71,10 +71,10 @@ def spreadsheetsToCSV(credentials = None , sheetName = None,
         
         #file's name is datetime
         nameFile = datetime.today().strftime('%A_%B_%d_%Y_%H_%M_%S')
-        if(routeOut != ""):
-            os.makedirs(routeOut, exist_ok=True)#create the path where the output file is saved
+        if(inputRoute != ""):
+            os.makedirs(inputRoute, exist_ok=True)#create the path where the output file is saved
             #Final Route
-            outRoute = routeOut+'/'+nameFile+".csv"
+            outRoute = inputRoute+'/'+nameFile+".csv"
         else:
             #Final Route
             outRoute = nameFile+".csv"
