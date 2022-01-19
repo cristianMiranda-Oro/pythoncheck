@@ -44,10 +44,7 @@ def spreadsheetsToCSV(credentials = None , sheetName = None,
         #**********************************************************************
         #**********************************************************************
         #**********************************************************************
-        
-        if(routeOut != ""):
-            os.makedirs(routeOut, exist_ok=True)#create the path where the output file is saved
-        
+ 
         scope = ["https://spreadsheets.google.com/feeds",
                  'https://www.googleapis.com/auth/spreadsheets',
                  "https://www.googleapis.com/auth/drive.file",
@@ -72,17 +69,18 @@ def spreadsheetsToCSV(credentials = None , sheetName = None,
         #*********************Convert and save file****************************
         #**********************************************************************
         
-        # convert the json to dataframe
-        records_df = pd.DataFrame.from_dict(records_data)
-        
-        # view the top records
-        records_df.head()
-        
         #file's name is datetime
         nameFile = datetime.today().strftime('%A_%B_%d_%Y_%H_%M_%S')
-        
-        #Final Route
-        outRoute = routeOut+'/'+nameFile+".csv"
+        if(routeOut != ""):
+            os.makedirs(routeOut, exist_ok=True)#create the path where the output file is saved
+            #Final Route
+            outRoute = routeOut+'/'+nameFile+".csv"
+        else:
+            #Final Route
+            outRoute = nameFile+".csv"
+            
+        # convert the json to dataframe
+        records_df = pd.DataFrame.from_dict(records_data)
         
         records_df.to_csv(outRoute, index=False) 
         
@@ -100,5 +98,5 @@ def spreadsheetsToCSV(credentials = None , sheetName = None,
 
 
 #Test1
-outRoute = spreadsheetsToCSV("Keys.json", "MarkeBot", 1, "output")
+outRoute = spreadsheetsToCSV("Keys.json", "MarkeBot", 1)
 
