@@ -99,18 +99,6 @@ def spreadsheetsToCSV(credentials = None , sheetName = None,
     return outRoute
 
 
+#Test1
 outRoute = spreadsheetsToCSV("Keys.json", "MarkeBot", 1, "output")
 
-
-# convert the json to dataframe
-records_df = pd.DataFrame.from_dict(records_data)
-
-# view the top records
-records_df.head()
-
-records_df.to_csv('dir1/dir2/di3/out2.csv', index=False) 
-
-
-print(datetime.today().strftime('%A_%B_%d_%Y_%H_%M_%S'))
-
-os.makedirs('dir1/dir2/di3', exist_ok = True)
